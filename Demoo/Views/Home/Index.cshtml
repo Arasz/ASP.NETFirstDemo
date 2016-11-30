@@ -1,0 +1,41 @@
+﻿@*Ten widok wyświetla wszystkie kontakty które zostały mu przekazane w modelu oraz odnośniki do stron tworzenia oraz edytowania kontaktów*@
+
+@*Deklarujemy, że ten widok będzie miał model danych którym jest lista obiektów klasy Contact*@
+@model IEnumerable<Demoo.Models.Contact>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Menedżer kontaktów</h2>
+
+@*Generowanie linka na którym wyświetlony będzie tekst "Dodaj nowy". Przekierowanie nastąpi do akcji Add w kontrolerze Home.
+Dodatkowo nadane zostały bootstrapowe klasy "btn" oraz "btn-primary" w celu nadania styli dla tego elementu*@
+@Html.ActionLink("Dodaj nowy", "Add", null, new { @class = "btn btn-primary"})
+
+@*Tabelka w której wyświetlimy wszystkie informacje zawarte w naszym modelu*@
+<table class="table table-responsive table-striped">
+    <tr>
+        @*DisplayNameFor wyświetla nazwę danej właściwości którą wybieramy z naszego modelu*@
+        <th width="20%">@Html.DisplayNameFor(model => model.Name)</th>
+        <th width="20%">@Html.DisplayNameFor(model => model.LastName)</th>
+        <th width="20%">@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+        <th width="20%">@Html.DisplayNameFor(model => model.Email)</th>
+        <th width="20%"></th>
+    </tr>
+
+    @*W widokach .cshtml które obsługują silnik Razor można tworzyć kod c# który posłuży nam w tym wypadku do przeitorowania po liście kontaktów znajdujących się w modelu*@
+    @foreach (var contact in Model)
+    {
+        <tr>
+            @*W tabeli wyświetlimy wartości danej właściwości którą wybieramy z naszego modelu*@
+            <td>@contact.Name</td>
+            <td>@contact.LastName</td>
+            <td>@contact.PhoneNumber</td>
+            <td>@contact.Email</td>
+            @*Generujemy link z tekstem "Edytuj" do akcji Edit kontrolera Home. Dodatkowo przekazujemy mu w parametrze id kontaktu który chcemy edytować 
+            (ponieważ akcja ta w kontrolerze przyjmuje parametr int? id więc jesteśmy w stanie przekazać go w taki właśnie sposób)*@
+            <td>@Html.ActionLink("Edytuj", "Edit", new { id = contact.Id })</td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,59 @@
+﻿@*Ten widok wyświetla formularz przez który jesteśmy w stanie edytować dany kontakt z naszej bazy*@
+
+@*Deklarujemy, że ten widok będzie miał model danych którym jest obiekt klasy Contact*@
+@model Demoo.Models.Contact
+
+
+<h2>Edytowanie kontaktu</h2>
+
+@*Tworzymy formularz który po zatwierdzeniu zostanie wysłany Postem do metody Edit kontrolera Home*@
+@using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+{
+    //Ukryte pole dla naszego Id (chcemy by wysłało się razem z formularzem)
+    @Html.HiddenFor(model => model.Id)
+
+    //Wyświetlenie formularza. LabelFor tworzy etykietę dla danej właściwości modelu, natomiast EditorFor tworzy input
+    //do wpisania wartości w zależności od typu właściwości.
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Zapisz" />
+        </div>
+    </div>
+    
+}
+
